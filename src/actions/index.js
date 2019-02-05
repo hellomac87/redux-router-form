@@ -1,6 +1,8 @@
-export const action = () => {
+export const ACTION_CREATOR = "ACTION_CREATOR";
+
+export const actionCreator = () => {
   return {
-    type: "ACTION_TYPE",
+    type: "ACTION_CREATOR",
     payload: null
   };
 };
