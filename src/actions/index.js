@@ -1,8 +1,15 @@
-export const ACTION_CREATOR = "ACTION_CREATOR";
+import axios from "axios";
 
-export const actionCreator = () => {
+export const FETCH_POSTS = "FETCH_POSTS";
+
+const ROOT_URL = "http://reduxblog.herokuapp.com/api";
+const API_KEY = "?key=hellomac87";
+
+export const fetchPosts = () => {
+  const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
+
   return {
-    type: "ACTION_CREATOR",
-    payload: null
+    type: FETCH_POSTS,
+    payload: request
   };
 };

@@ -3,17 +3,18 @@ import ReactDOM from "react-dom";
 
 import * as serviceWorker from "./serviceWorker";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 
 import routes from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import reducers from "./reducers";
+import promise from "redux-promise";
 
-const store = createStore(reducers);
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <Router>{routes}</Router>
   </Provider>,
   document.getElementById("root")
