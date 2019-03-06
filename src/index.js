@@ -11,6 +11,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import reducers from "./reducers";
 import promise from "redux-promise";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
