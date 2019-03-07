@@ -1,29 +1,52 @@
 import React, { Component } from "react";
-import { reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
+import { Field, reduxForm } from "redux-form";
 
 class PostsNew extends Component {
   render() {
-    return (
-      <Container>
-        <Form>
-          <h3>Create A New Post</h3>
-          <FormGroup>
-            <Label for="title">Title</Label>
-            <Input type="text" name="title" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="categories">Categories</Label>
-            <Input type="text" name="categories" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="content">Content</Label>
-            <Input type="textarea" name="content" />
-          </FormGroup>
+    const { fields, handleSubmit } = this.props;
 
-          <Button>Submit</Button>
-        </Form>
-      </Container>
+    console.log(this.props);
+
+    return (
+      <form
+        onSubmit={() => {
+          handleSubmit();
+        }}
+      >
+        <h3>Create A New Post</h3>
+        <div className="form-group">
+          <label for="title">Title</label>
+          <Field
+            className="form-control"
+            type="text"
+            name="title"
+            component="input"
+          />
+        </div>
+        <div>
+          <label for="categories">Categories</label>
+          <Field
+            className="form-control"
+            type="text"
+            name="categories"
+            component="input"
+          />
+        </div>
+        <div>
+          <label for="content">Content</label>
+          <Field
+            className="form-control"
+            type="textarea"
+            name="content"
+            component="textarea"
+          />
+        </div>
+        <div className="form-group">
+          <button className="btn btn-primary btn-block" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
     );
   }
 }
