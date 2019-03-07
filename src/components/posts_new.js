@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { createPost } from "../actions/index";
+import { connect } from "react-redux";
 
 class PostsNew extends Component {
   render() {
-    const { fields, handleSubmit } = this.props;
+    const { createPost, handleSubmit } = this.props;
 
     console.log(this.props);
 
     return (
-      <form
-        onSubmit={() => {
-          handleSubmit();
-        }}
-      >
+      <form onSubmit={handleSubmit(createPost)}>
         <h3>Create A New Post</h3>
         <div className="form-group">
-          <label for="title">Title</label>
+          <label htmlFor="title">Title</label>
           <Field
             className="form-control"
             type="text"
@@ -24,7 +22,7 @@ class PostsNew extends Component {
           />
         </div>
         <div>
-          <label for="categories">Categories</label>
+          <label htmlFor="categories">Categories</label>
           <Field
             className="form-control"
             type="text"
@@ -33,7 +31,7 @@ class PostsNew extends Component {
           />
         </div>
         <div>
-          <label for="content">Content</label>
+          <label htmlFor="content">Content</label>
           <Field
             className="form-control"
             type="textarea"
@@ -51,7 +49,13 @@ class PostsNew extends Component {
   }
 }
 
+// connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
+// reducForm: 1st us form config, 2nd is mapStateToProps, 3nd is mapDispatchToProps
+PostsNew = connect(
+  null,
+  { createPost }
+)(PostsNew);
+
 export default reduxForm({
-  form: "PostsNewForm",
-  fields: ["title", "categories", "content"]
+  form: "PostsNewForm"
 })(PostsNew);
