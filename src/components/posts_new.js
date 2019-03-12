@@ -10,7 +10,7 @@ class PostsNew extends Component {
     console.log(this.props);
 
     return (
-      <form onSubmit={handleSubmit(createPost)}>
+      <form onSubmit={handleSubmit(createPost)} style={{ padding: "1rem" }}>
         <h3>Create A New Post</h3>
         <div className="form-group">
           <label htmlFor="title">Title</label>
@@ -21,7 +21,7 @@ class PostsNew extends Component {
             component="input"
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="categories">Categories</label>
           <Field
             className="form-control"
@@ -30,7 +30,7 @@ class PostsNew extends Component {
             component="input"
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="content">Content</label>
           <Field
             className="form-control"
@@ -49,6 +49,21 @@ class PostsNew extends Component {
   }
 }
 
+const validate = values => {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = "Enter a username";
+  }
+  if (!values.categories) {
+    errors.categories = "Enter a categories";
+  }
+  if (!values.content) {
+    errors.content = "Enter a content";
+  }
+  return errors;
+};
+
 // connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
 // reducForm: 1st us form config, 2nd is mapStateToProps, 3nd is mapDispatchToProps
 PostsNew = connect(
@@ -57,5 +72,6 @@ PostsNew = connect(
 )(PostsNew);
 
 export default reduxForm({
-  form: "PostsNewForm"
+  form: "PostsNewForm",
+  validate
 })(PostsNew);
