@@ -6,6 +6,12 @@ import { connect } from "react-redux";
 class PostsNew extends Component {
   render() {
     const { createPost, handleSubmit } = this.props;
+    // const {
+    //   input,
+    //   label,
+    //   type,
+    //   meta: { touched, error, warning }
+    // } = this.props;
 
     console.log(this.props);
 
@@ -13,30 +19,28 @@ class PostsNew extends Component {
       <form onSubmit={handleSubmit(createPost)} style={{ padding: "1rem" }}>
         <h3>Create A New Post</h3>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
           <Field
-            className="form-control"
             type="text"
             name="title"
-            component="input"
+            label="title"
+            component={renderField}
           />
+          {/* <div className="text-help">{title.error}</div> */}
         </div>
         <div className="form-group">
-          <label htmlFor="categories">Categories</label>
           <Field
-            className="form-control"
             type="text"
             name="categories"
-            component="input"
+            label="categories"
+            component={renderField}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="content">Content</label>
           <Field
-            className="form-control"
             type="textarea"
             name="content"
-            component="textarea"
+            label="content"
+            component={renderField}
           />
         </div>
         <div className="form-group">
@@ -48,6 +52,28 @@ class PostsNew extends Component {
     );
   }
 }
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input
+        className="form-control"
+        {...input}
+        placeholder={label}
+        type={type}
+      />
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+);
 
 const validate = values => {
   const errors = {};
